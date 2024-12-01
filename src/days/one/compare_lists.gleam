@@ -35,15 +35,27 @@ pub fn compare(filename: String) -> Nil {
     }
   }
 
-  // io.println(parseInput(x))
-  let #(a, b) = parse_input(x)
-  let #(a, b) = #(list.sort(a, by: int.compare), list.sort(b, int.compare))
-
-  io.debug(
-    list.zip(a, b)
-    |> list.map(fn(vals) { int.subtract(vals.0, vals.1) |> int.absolute_value })
-    |> list.fold(0, int.add),
+  let #(list_a, list_b) = parse_input(x)
+  io.debug([list_a, list_b])
+  let #(sorted_a, sorted_b) = #(
+    list.sort(list_a, by: int.compare),
+    list.sort(list_b, int.compare),
   )
+
+  let total_diff =
+    list.zip(sorted_a, sorted_b)
+    |> list.map(fn(vals) { int.subtract(vals.0, vals.1) |> int.absolute_value })
+    |> list.fold(0, int.add)
+
+  io.println("Part 1: " <> int.to_string(total_diff))
+
+  let part_2 =
+    list.fold(list_a, 0, fn(acc, x) {
+      let counted = list.count(list_b, fn(y) { x == y })
+      x * counted + acc
+    })
+
+  io.println("Part 2: " <> int.to_string(part_2))
 
   Nil
 }

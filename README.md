@@ -8,7 +8,7 @@ If you do not have nix installed, make sure you have a recent version of gleam a
 
 ## Running
 
-To run a day, run `aoc24 day# <path to input>` where # is the day number. 
+To run a day, run `gleam run aoc24 day# <path to input>` where # is the day number. 
 
 e.g. save the input to `inputs/day1.txt` and run `aoc24 day1 inputs/day1.txt`
 
