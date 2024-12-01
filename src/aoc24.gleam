@@ -1,10 +1,10 @@
 import argv
-import days/one/compare_lists
+import days/day_one
 import gleam/io
 
 pub fn main() {
   case argv.load().arguments {
-    ["day1", filename] -> compare_lists.compare(filename)
+    ["day1", filename] -> day_one.print_result(filename)
     _ -> io.println("Usage: vars day#")
   }
 }
