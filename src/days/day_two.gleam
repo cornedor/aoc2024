@@ -23,9 +23,9 @@ fn get_direction(a, b) {
   }
 }
 
-fn is_valid(input: List(Int), direction: Int) {
+fn is_valid(input: List(Int), direction: Int, index: Int) -> #(Bool, Int) {
   case input {
-    [_] | [] -> True
+    [_] | [] -> #(True, index)
     [a, b, ..rest] -> {
       let direction = case direction {
         0 -> get_direction(a, b)
@@ -38,17 +38,38 @@ fn is_valid(input: List(Int), direction: Int) {
       let is_same_direction = direction == get_direction(a, b) || direction == 0
 
       case is_in_range && is_same_direction {
-        False -> False
-        True -> is_valid([b, ..rest], direction)
+        False -> #(False, index)
+        True -> is_valid([b, ..rest], direction, index + 1)
       }
     }
   }
 }
 
+fn fault_tollerant_check(input: List(Int), direction: Int) {
+  case is_valid(input, direction, 0) {
+    #(True, _) -> True
+    #(False, index) -> {
+      [
+        remove_at_index(input, index + -1),
+        remove_at_index(input, index),
+        remove_at_index(input, index + 1),
+      ]
+      |> list.any(fn(x) { is_valid(x, direction, 0).0 })
+    }
+  }
+}
+
+pub fn remove_at_index(list: List(a), index: Int) -> List(a) {
+  list.take(list, index)
+  |> list.append(list.drop(list, index + 1))
+}
+
 pub fn check_levels_string(input: String) {
   let input = parse_input(input)
 
-  #(list.count(input, is_valid(_, 0)))
+  let p2 = list.count(input, fn(line) { fault_tollerant_check(line, 0) })
+
+  #(list.count(input, fn(line) { is_valid(line, 0, 0).0 }), p2)
 }
 
 fn check_levels(path: String) {
@@ -56,9 +77,10 @@ fn check_levels(path: String) {
 }
 
 pub fn print_result(path: String) -> Nil {
-  let #(part_one) = check_levels(path)
+  let #(part_one, part_two) = check_levels(path)
 
   io.println("Part 1: " <> int.to_string(part_one))
+  io.println("Part 2: " <> int.to_string(part_two))
 
   Nil
 }
