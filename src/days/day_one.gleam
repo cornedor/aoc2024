@@ -2,7 +2,8 @@ import gleam/int
 import gleam/io
 import gleam/list
 import gleam/string
-import simplifile
+
+import utils/input_file
 
 fn parse_input(input: String) {
   input
@@ -46,20 +47,12 @@ pub fn compare_string(input: String) {
   #(result_one, result_two)
 }
 
-pub fn compare(filename: String) {
-  let content = case simplifile.read(from: filename) {
-    Ok(x) -> x
-    Error(_) -> {
-      io.println("Could not read file")
-      panic as "Could not read file"
-    }
-  }
-
-  compare_string(content)
+pub fn compare(path: String) {
+  compare_string(input_file.read(path))
 }
 
-pub fn print_result(filename: String) -> Nil {
-  let #(result_one, result_two) = compare(filename)
+pub fn print_result(path: String) -> Nil {
+  let #(result_one, result_two) = compare(path)
 
   io.println("Part 1: " <> int.to_string(result_one))
   io.println("Part 2: " <> int.to_string(result_two))

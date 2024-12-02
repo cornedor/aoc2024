@@ -1,4 +1,5 @@
 import days/day_one
+import days/day_two
 import gleeunit
 import gleeunit/should
 
@@ -23,4 +24,17 @@ pub fn day1_test() {
 ",
   )
   |> should.equal(#(11, 31))
+}
+
+pub fn day2_test() {
+  let input =
+    "7 6 4 2 1
+1 2 7 8 9
+9 7 6 2 1
+1 3 2 4 5
+8 6 4 4 1
+1 3 6 7 9"
+
+  day_two.check_levels_string(input)
+  |> should.equal(#(2))
 }
