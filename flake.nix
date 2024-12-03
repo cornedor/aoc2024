@@ -14,6 +14,7 @@
             packages = [
               pkgs.gleam
               pkgs.erlang_27
+              pkgs.rebar3
             ];
           };
         };

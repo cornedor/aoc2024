@@ -4,7 +4,7 @@
 
 If you have nix and direnv installed, you can run `direnv allow` to get all dependencies. If you just have nix installed, you can run `nix develop` to get a shell with all dependencies.
 
-If you do not have nix installed, make sure you have a recent version of gleam and erlang installed.
+If you do not have nix installed, make sure you have a recent version of gleam, erlang and rebar3 installed.
 
 ## Running
 
@@ -12,3 +12,8 @@ To run a day, run `gleam run aoc24 day# <path to input>` where # is the day numb
 
 e.g. save the input to `inputs/day1.txt` and run `aoc24 day1 inputs/day1.txt`
 
+## Tests
+
+To run and watch tests run `gleam test --target erlang -- --glacier`
+
+To run a specific test `gleam test -- test/day_one.gleam`
