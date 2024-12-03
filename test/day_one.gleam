@@ -2,7 +2,7 @@ import days/day_one
 import glacier/should
 
 pub fn day1_test() {
-  day_one.compare_string(
+  day_one.compare(
     "3   4
 4   3
 2   5

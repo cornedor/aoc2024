@@ -16,8 +16,8 @@ fn print_result(filename: String, func: fn(String) -> #(Int, Int)) {
 
 pub fn main() {
   case argv.load().arguments {
-    ["day1", filename] -> day_one.print_result(filename)
-    ["day2", filename] -> day_two.print_result(filename)
+    ["day1", filename] -> print_result(filename, day_one.compare)
+    ["day2", filename] -> print_result(filename, day_two.check_levels)
     ["day3", filename] -> print_result(filename, day_three.compute)
     _ -> io.println("Usage: vars day#")
   }

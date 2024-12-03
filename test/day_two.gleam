@@ -15,6 +15,6 @@ pub fn day_two_test() {
   day_two.remove_at_index([1, 2, 3, 4, 5], -1)
   |> should.equal([1, 2, 3, 4, 5])
 
-  day_two.check_levels_string(input)
+  day_two.check_levels(input)
   |> should.equal(#(2, 4))
 }

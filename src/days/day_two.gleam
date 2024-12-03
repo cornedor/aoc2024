@@ -1,8 +1,6 @@
 import gleam/int
-import gleam/io
 import gleam/list
 import gleam/string
-import utils/input_file
 
 fn parse_input(input: String) {
   string.trim(input)
@@ -64,23 +62,10 @@ pub fn remove_at_index(list: List(a), index: Int) -> List(a) {
   |> list.append(list.drop(list, index + 1))
 }
 
-pub fn check_levels_string(input: String) {
+pub fn check_levels(input: String) {
   let input = parse_input(input)
 
   let p2 = list.count(input, fn(line) { fault_tollerant_check(line, 0) })
 
   #(list.count(input, fn(line) { is_valid(line, 0, 0).0 }), p2)
-}
-
-fn check_levels(path: String) {
-  check_levels_string(input_file.read(path))
-}
-
-pub fn print_result(path: String) -> Nil {
-  let #(part_one, part_two) = check_levels(path)
-
-  io.println("Part 1: " <> int.to_string(part_one))
-  io.println("Part 2: " <> int.to_string(part_two))
-
-  Nil
 }
