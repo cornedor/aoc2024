@@ -1,4 +1,5 @@
 import argv
+import days/day_four
 import days/day_one
 import days/day_three
 import days/day_two
@@ -19,6 +20,7 @@ pub fn main() {
     ["day1", filename] -> print_result(filename, day_one.compare)
     ["day2", filename] -> print_result(filename, day_two.check_levels)
     ["day3", filename] -> print_result(filename, day_three.compute)
+    ["day4", filename] -> print_result(filename, day_four.find_xmas)
     _ -> io.println("Usage: vars day#")
   }
 }
