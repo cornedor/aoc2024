@@ -1,7 +1,7 @@
 import days/day_four
 import glacier/should
 
-pub fn day_three_test() {
+pub fn day_four_test() {
   let input =
     "MMMSXXMASM
 MSAMXMSMSA

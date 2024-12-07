@@ -1,6 +1,8 @@
 import argv
+import days/day_five
 import days/day_four
 import days/day_one
+import days/day_six
 import days/day_three
 import days/day_two
 import gleam/int
@@ -21,6 +23,8 @@ pub fn main() {
     ["day2", filename] -> print_result(filename, day_two.check_levels)
     ["day3", filename] -> print_result(filename, day_three.compute)
     ["day4", filename] -> print_result(filename, day_four.find_xmas)
+    ["day5", filename] -> print_result(filename, day_five.check_pages)
+    ["day6", filename] -> print_result(filename, day_six.walk)
     _ -> io.println("Usage: vars day#")
   }
 }
