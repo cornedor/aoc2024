@@ -16,5 +16,5 @@ pub fn day_six_test() {
 ......#...
 ",
   )
-  |> should.equal(#(41, 0))
+  |> should.equal(#(41, 6))
 }
