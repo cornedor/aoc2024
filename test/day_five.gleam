@@ -34,5 +34,5 @@ pub fn day_five_test() {
 "
 
   day_five.check_pages(input)
-  |> should.equal(#(143, 0))
+  |> should.equal(#(143, 123))
 }

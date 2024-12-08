@@ -2,6 +2,8 @@ import gleam/dict
 import gleam/int
 import gleam/io
 import gleam/list
+import gleam/order
+import gleam/result
 import gleam/string
 import utils/dict_utils
 
@@ -56,15 +58,6 @@ pub fn check_pages(input) {
       })
     })
 
-  // 61 53 29
-  let _ =
-    list.map(correct, fn(page) {
-      dict.values(page)
-      |> list.map(int.to_string)
-      |> string.join(",")
-      |> io.debug
-    })
-
   let part_1 =
     list.map(correct, fn(page) {
       let values = dict.values(page)
@@ -76,5 +69,30 @@ pub fn check_pages(input) {
     })
     |> list.fold(0, fn(acc, x) { acc + x })
 
-  #(part_1, 0)
+  let part_2 =
+    list.fold(pages, 0, fn(acc, page) {
+      let values = dict.values(page)
+      let sorted =
+        list.sort(values, fn(a, b) {
+          let lt = list.contains(instructions, #(a, b))
+          let gt = list.contains(instructions, #(b, a))
+
+          case lt, gt {
+            True, _ -> order.Lt
+            _, True -> order.Gt
+            _, _ -> order.Eq
+          }
+        })
+
+      case values == sorted {
+        True -> acc
+        False -> {
+          let mid = { list.length(values) - 1 } / 2
+          let mid = list.drop(sorted, mid) |> list.first |> result.unwrap(0)
+          acc + mid
+        }
+      }
+    })
+
+  #(part_1, part_2)
 }
