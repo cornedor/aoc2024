@@ -2,6 +2,7 @@ import argv
 import days/day_five
 import days/day_four
 import days/day_one
+import days/day_seven
 import days/day_six
 import days/day_three
 import days/day_two
@@ -25,6 +26,7 @@ pub fn main() {
     ["day4", filename] -> print_result(filename, day_four.find_xmas)
     ["day5", filename] -> print_result(filename, day_five.check_pages)
     ["day6", filename] -> print_result(filename, day_six.walk)
+    ["day7", filename] -> print_result(filename, day_seven.run)
     _ -> io.println("Usage: vars day#")
   }
 }
